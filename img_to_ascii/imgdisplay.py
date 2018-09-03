@@ -29,10 +29,11 @@ def main(filepath: str, width: int=80, height: int=40):
 if __name__ == "__main__":
     if len(sys.argv) > 1 and os.path.exists(sys.argv[1]):
         path = sys.argv[1]
-        width = 80
+        terminal_size = os.get_terminal_size()
+        width = terminal_size.columns
         if len(sys.argv) >= 3:
             width = int(sys.argv[2])
-        height = 40
+        height = terminal_size.lines
         if len(sys.argv) >= 4:
             height = int(sys.argv[3])
         main(filepath=path, width=width, height=height)
@@ -40,6 +41,6 @@ if __name__ == "__main__":
         print("ERROR: 缺少参数\n")
         print(f"完整命令： {sys.argv[0]} filepath [width] [height]")
         print("filepath: 图片文件路径，支持多数图片格式")
-        print("width: 输出宽度 （可选，默认80）")
-        print("height: 输出高度 （可选，默认40）")
+        print("width: 输出宽度 （可选，终端尺寸）")
+        print("height: 输出高度 （可选，终端尺寸）")
         print()
